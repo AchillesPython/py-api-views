@@ -15,7 +15,6 @@ class GenreList(APIView):
         serializer = GenreSerializer(genres, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
     def post(self, request, *args, **kwargs):
         serializer = GenreSerializer(data=request.data)
         if serializer.is_valid():
@@ -54,6 +53,7 @@ class GenreDetail(APIView):
         genre.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class ActorList(GenericAPIView,
                 mixins.ListModelMixin,
                 mixins.CreateModelMixin):
@@ -61,30 +61,32 @@ class ActorList(GenericAPIView,
     queryset = Actor.objects.all()
 
     def get(self, request):
-            return self.list(request)
+        return self.list(request)
 
     def post(self, request):
-            return self.create(request)
+        return self.create(request)
+
 
 class ActorDetail(GenericAPIView,
-                    mixins.RetrieveModelMixin,
-                    mixins.CreateModelMixin,
-                    mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin):
+                mixins.RetrieveModelMixin,
+                mixins.CreateModelMixin,
+                mixins.UpdateModelMixin,
+                mixins.DestroyModelMixin):
     serializer_class = ActorSerializer
     queryset = Actor.objects.all()
 
     def get(self, request, pk):
-            return self.retrieve(request, pk)
+        return self.retrieve(request, pk)
 
     def put(self, request, pk):
-            return self.update(request, pk)
+        return self.update(request, pk)
 
     def patch(self, request, pk):
-            return self.partial_update(request, pk)
+        return self.partial_update(request, pk)
 
     def delete(self, request, pk):
-            return self.destroy(request, pk)
+        return self.destroy(request, pk)
+
 
 class CinemaHallViewSet(GenericViewSet,
                         mixins.ListModelMixin,
@@ -109,6 +111,7 @@ class CinemaHallViewSet(GenericViewSet,
 
     def delete(self, request, pk):
         return self.destroy(request, pk)
+
 
 class MovieViewSet(ModelViewSet):
     serializer_class = MovieSerializer
